@@ -1,16 +1,14 @@
-const axios = require('axios');
-axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
-// for scope of the assignment, since I have demonstrated usage of config files
-// in the backend portion, will use hard coded strings
+import axios from 'axios'
+import config from '../config';
 
 const getInitialActivity = async () => {
-    return axios.get('http://localhost:8000/activity');
+    return axios.get(`${config.SERVICE_URL}/activity`);
 }
 
 const addUser = async (user) => {
     return axios({
         method: 'post',
-        url: 'http://localhost:8000/user',
+        url: `${config.SERVICE_URL}/user`,
         data: user,
      });
 }
@@ -19,7 +17,7 @@ const addUser = async (user) => {
 // hoever, for purpose of this exercise, kept it as a generic get call
 // since we are assuming last user as the currentUser entity
 const getUserCustomedActivities = () => {
-    return axios.get('http://localhost:8000/user/activity?id=foo');
+    return axios.get(`${config.SERVICE_URL}/user/activity?id=foo`);
 }
 
 export {getInitialActivity, addUser, getUserCustomedActivities}

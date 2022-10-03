@@ -1,20 +1,24 @@
+import { useState } from 'react';
+import PropTypes from 'prop-types'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {addUser} from '../service'
-import { useState } from 'react';
-import {getUserCustomedActivities} from '../service'
+import {addUser, getUserCustomedActivities} from '../service'
 
 // Note: In real implication settings, we should not use alert, but use snackbars
 // to address is gracefully - also, we should probably have a customized rendering UI
 // than empty space ( probably common component ) but for scope of this exercise
 // component is rendering without crashing even with no data
+// Note 2: Also, I would think having a radio/dropdown would be more suitable for the 
+// accesibility and price setting, but for testing purposes, please use 'High or Low'
+// as input value.
 const Form = ({ currentUser, setCurrentUser, setActivity }) => {
   const [name, setName] = useState(currentUser?.name);
   const [acc, setAcc] = useState(currentUser?.accessibility);
   const [price, setPrice] = useState(currentUser?.price);
 
   const handleSubmit = async () => {
+    // TODO: should have some type of FE validation here or on the TextField itself //
     setCurrentUser(await addUser({name: name, accessibility: acc, price: price}))
     alert('Thanks for signing up!')
   };
@@ -52,4 +56,11 @@ const Form = ({ currentUser, setCurrentUser, setActivity }) => {
   )
 }
 
+Form.propTypes = {
+  currentUser: PropTypes.object,
+  setCurrentUser: PropTypes.func,
+  setActivity: PropTypes.func,
+}
+
 export default Form
+

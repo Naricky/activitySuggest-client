@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import Box from '@mui/material/Box';
 
 const Activity =  ({activity}) => { 
@@ -10,6 +11,10 @@ const Activity =  ({activity}) => {
             {activity?.activity && <Box>Activity Accessbility: {activity.accessibility} </Box>}
         </Box>
     )
+}
+
+Activity.propTypes = {
+    activity: PropTypes.object,
 }
 
 export default Activity
